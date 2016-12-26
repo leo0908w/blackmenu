@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by user on 2016/12/23.
- */
 
 public class Rice extends Fragment {
     @Override

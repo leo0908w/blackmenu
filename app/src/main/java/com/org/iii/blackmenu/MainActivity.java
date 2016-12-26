@@ -1,29 +1,39 @@
 package com.org.iii.blackmenu;
 
 
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
+
 public class MainActivity extends AppCompatActivity {
     private CoordinatorLayout coordinatorLayout;
+    private F1 f1;
+    private F2 f2;
+    private FragmentManager fmr;
+    private FragmentTransaction ftn;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        f1 = new F1();
+        f2 = new F2();
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.three_buttons_activity);
 
@@ -34,16 +44,29 @@ public class MainActivity extends AppCompatActivity {
                 switch (itemId) {
                     case R.id.recent_item:
                         Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
+                        fmr = getSupportFragmentManager();
+                        ftn = fmr.beginTransaction();
+                        ftn.replace(R.id.container, f1);
+                        ftn.commit();
                         break;
                     case R.id.location_item:
                         Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
+                        fmr = getSupportFragmentManager();
+                        ftn = fmr.beginTransaction();
+                        ftn.replace(R.id.container, f2);
+                        ftn.commit();
                         break;
                 }
             }
         });
 
+        fmr = getSupportFragmentManager();
+        ftn = fmr.beginTransaction();
+        ftn.add(R.id.container, f1);
+        ftn.commit();
+
         // Set the color for the active tab. Ignored on mobile when there are more than three tabs.
-        bottomBar.setActiveTabColor("#C2185B");
+//        bottomBar.setActiveTabColor("#C2185B");
 
         // Use the dark theme. Ignored on mobile when there are more than three tabs.
 //        bottomBar.useDarkTheme(true);
@@ -55,18 +78,7 @@ public class MainActivity extends AppCompatActivity {
         // custom text appearance, set the text appearance first.
 //        bottomBar.setTypeFace("MyFont.ttf");
 
-        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
-                getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.titleA, Rice.class)
-                .add(R.string.titleB, Noodle.class)
-                .add(R.string.titleC, Soup.class)
-                .create());
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(adapter);
-
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
-        viewPagerTab.setViewPager(viewPager);
 
     }
 }
