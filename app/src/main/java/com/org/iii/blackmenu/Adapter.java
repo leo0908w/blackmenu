@@ -62,7 +62,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public ImageView imageView;
         public TextView nameTextView;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
