@@ -71,14 +71,14 @@ public class Noodle extends Fragment {
 
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
-        apps.add(new App("豚王", R.drawable.noodle1));
-        apps.add(new App("赤王", R.drawable.noodle2));
-        apps.add(new App("翠王", R.drawable.noodle3));
-        apps.add(new App("豚王", R.drawable.noodle1));
-        apps.add(new App("赤王", R.drawable.noodle2));
-        apps.add(new App("豚王", R.drawable.noodle1));
-        apps.add(new App("赤王", R.drawable.noodle2));
-        apps.add(new App("翠王", R.drawable.noodle3));
+//        apps.add(new App("豚王", R.drawable.noodle1));
+//        apps.add(new App("赤王", R.drawable.noodle2));
+//        apps.add(new App("翠王", R.drawable.noodle3));
+//        apps.add(new App("豚王", R.drawable.noodle1));
+//        apps.add(new App("赤王", R.drawable.noodle2));
+//        apps.add(new App("豚王", R.drawable.noodle1));
+//        apps.add(new App("赤王", R.drawable.noodle2));
+//        apps.add(new App("翠王", R.drawable.noodle3));
 
 
         return apps;

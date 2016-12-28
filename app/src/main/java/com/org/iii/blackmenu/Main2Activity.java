@@ -71,17 +71,17 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
 
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
-        apps.add(new App("Google+", R.drawable.rice2));
-        apps.add(new App("Gmail", R.drawable.rice2));
-        apps.add(new App("Inbox", R.drawable.rice2));
-        apps.add(new App("Google Keep", R.drawable.rice2));
-        apps.add(new App("Google Drive", R.drawable.rice2));
-        apps.add(new App("Hangouts", R.drawable.rice2));
-        apps.add(new App("Google Photos", R.drawable.rice2));
-        apps.add(new App("Messenger", R.drawable.rice2));
-        apps.add(new App("Sheets", R.drawable.rice2));
-        apps.add(new App("Slides", R.drawable.rice2));
-        apps.add(new App("Docs", R.drawable.rice2));
+//        apps.add(new App("Google+", R.drawable.rice2));
+//        apps.add(new App("Gmail", R.drawable.rice2));
+//        apps.add(new App("Inbox", R.drawable.rice2));
+//        apps.add(new App("Google Keep", R.drawable.rice2));
+//        apps.add(new App("Google Drive", R.drawable.rice2));
+//        apps.add(new App("Hangouts", R.drawable.rice2));
+//        apps.add(new App("Google Photos", R.drawable.rice2));
+//        apps.add(new App("Messenger", R.drawable.rice2));
+//        apps.add(new App("Sheets", R.drawable.rice2));
+//        apps.add(new App("Slides", R.drawable.rice2));
+//        apps.add(new App("Docs", R.drawable.rice2));
         return apps;
     }
 

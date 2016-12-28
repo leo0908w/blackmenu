@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
             public void onMenuItemSelected(int itemId) {
                 switch (itemId) {
                     case R.id.recent_item:
-                        Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
+//                        Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f1);
                         ftn.commit();
                         break;
                     case R.id.location_item:
-                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
+//                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f2);
                         ftn.commit();

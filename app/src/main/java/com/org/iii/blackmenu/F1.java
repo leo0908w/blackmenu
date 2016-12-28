@@ -32,6 +32,7 @@ public class F1 extends Fragment {
     private Rice rice;
     private Noodle noodle;
     private Soup soup;
+    private F2 f2;
 
     @Override
     public void onAttach(Context context) {
@@ -52,6 +53,7 @@ public class F1 extends Fragment {
         rice = new Rice();
         noodle = new Noodle();
         soup = new Soup();
+        f2 = new F2();
 //        Log.v("will", "F1-onCreate");
     }
 

@@ -25,11 +25,8 @@ import java.util.List;
 public class Rice extends Fragment {
     private RecyclerView mRecyclerView;
     private FragmentActivity myContext;
+    private F2 f2;
 
-    @Override
-    public void setMenuVisibility(boolean menuVisible) {
-        super.setMenuVisibility(menuVisible);
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -40,7 +37,7 @@ public class Rice extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        f2 = new F2();
 
     }
 

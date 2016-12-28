@@ -1,31 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
 
+    android:id="@+id/rel">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <ImageView
+        android:layout_below="@id/toolbar"
         android:id="@+id/menu_img"
         android:layout_width="match_parent"
         android:layout_height="286dp"
         android:src="@drawable/rice1"/>
-<!--<android.support.v7.widget.CardView-->
-    <!--android:layout_width=""-->
-    <!--android:layout_height=""></android.support.v7.widget.CardView>-->
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:id="@+id/textView2"
-        android:text="小計: "
-        android:textSize="36dp"
-        android:layout_below="@id/menu_img"/>
 
-    <TextView
-        android:id="@+id/item_price"
-        android:text="$20"
-        android:textSize="40dp"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@id/menu_img"
-        android:layout_toRightOf="@id/textView2"/>
+        android:layout_height="45dp"
+        android:layout_below="@+id/menu_img"
+        android:id="@+id/card1"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="8dp"
+        >
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="item"
+            android:textSize="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            />
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/card1"
+        android:id="@+id/card2"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="8dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:textSize="30dp"
+                android:layout_gravity="center_vertical"
+                android:text="份數: "/>
+
+            <Button
+                android:id="@+id/addMeal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="+"
+                android:textSize="24dp"/>
+
+            <TextView
+                android:id="@+id/numMeal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1"
+                android:textSize="24dp"
+                android:textColor="#000"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                />
+
+            <Button
+                android:id="@+id/subMeal"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="-"
+                android:textSize="24dp"/>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/card2"
+        android:layout_margin="5dp"
+        card_view:cardCornerRadius="8dp"
+        android:id="@+id/card3"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:id="@+id/textView2"
+                android:text="小計: "
+                android:textSize="30dp"
+                android:layout_centerVertical="true"
+                />
+            <ImageButton
+                android:layout_alignParentRight="true"
+
+                android:layout_margin="5dp"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:background="#638bb3"
+                android:id="@+id/imageButton"
+                />
+            <TextView
+                android:id="@+id/item_price"
+                android:text="$20"
+                android:textSize="30dp"
+                android:layout_toLeftOf="@id/imageButton"
+                android:gravity="end"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
 </RelativeLayout>

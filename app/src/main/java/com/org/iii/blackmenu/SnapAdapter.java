@@ -1,5 +1,6 @@
 package com.org.iii.blackmenu;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.PagerSnapHelper;
@@ -15,22 +16,10 @@ import android.widget.TextView;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> implements GravitySnapHelper.SnapListener {
 
-    public static final int VERTICAL = 0;
-    public static final int HORIZONTAL = 1;
-
-    private ArrayList<Snap> mSnaps;
-    // Disable touch detection for parent recyclerView if we use vertical nested recyclerViews
-    private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            v.getParent().requestDisallowInterceptTouchEvent(true);
-            return false;
-        }
-    };
+        private ArrayList<Snap> mSnaps;
 
     public SnapAdapter() {
         mSnaps = new ArrayList<>();
@@ -41,36 +30,8 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
     }
 
     @Override
-    public int getItemViewType(int position) {
-        Snap snap = mSnaps.get(position);
-        switch (snap.getGravity()) {
-            case Gravity.CENTER_VERTICAL:
-                return VERTICAL;
-            case Gravity.CENTER_HORIZONTAL:
-                return HORIZONTAL;
-            case Gravity.START:
-                return HORIZONTAL;
-            case Gravity.TOP:
-                return VERTICAL;
-            case Gravity.END:
-                return HORIZONTAL;
-            case Gravity.BOTTOM:
-                return VERTICAL;
-
-        }
-        return HORIZONTAL;
-    }
-
-    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = viewType == VERTICAL ? LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_snap_vertical, parent, false)
-                : LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_snap, parent, false);
-
-        if (viewType == VERTICAL) {
-            view.findViewById(R.id.recyclerView).setOnTouchListener(mTouchListener);
-        }
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_snap, parent, false);
 
         return new ViewHolder(view);
 
@@ -81,42 +42,27 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         Snap snap = mSnaps.get(position);
         holder.snapTextView.setText(snap.getText());
 
-        if (snap.getGravity() == Gravity.START || snap.getGravity() == Gravity.END) {
-            holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder
-                    .recyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-            holder.recyclerView.setOnFlingListener(null);
-            new GravitySnapHelper(snap.getGravity(), false, this).attachToRecyclerView(holder.recyclerView);
-        } else if (snap.getGravity() == Gravity.CENTER_HORIZONTAL) {
-            holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder
-                    .recyclerView.getContext(), snap.getGravity() == Gravity.CENTER_HORIZONTAL ?
-                    LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
-            holder.recyclerView.setOnFlingListener(null);
-            new LinearSnapHelper().attachToRecyclerView(holder.recyclerView);
-        } else if (snap.getGravity() == Gravity.CENTER) { // Pager snap
-            holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder
-                    .recyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-            holder.recyclerView.setOnFlingListener(null);
-            new PagerSnapHelper().attachToRecyclerView(holder.recyclerView);
-        } else { // Top / Bottom
-            holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder
-                    .recyclerView.getContext()));
-            holder.recyclerView.setOnFlingListener(null);
-            new GravitySnapHelper(snap.getGravity()).attachToRecyclerView(holder.recyclerView);
-        }
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder
+                .recyclerView.getContext(), snap.getGravity() == Gravity.CENTER_HORIZONTAL ?
+                LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+        holder.recyclerView.setOnFlingListener(null);
 
-        Adapter adapter = new Adapter(snap.getGravity() == Gravity.START
-                || snap.getGravity() == Gravity.END
-                || snap.getGravity() == Gravity.CENTER_HORIZONTAL,
+        new LinearSnapHelper().attachToRecyclerView(holder.recyclerView);
+        Adapter adapter = new Adapter(
+                snap.getGravity() == Gravity.CENTER_HORIZONTAL,
                 snap.getGravity() == Gravity.CENTER, snap.getApps());
 
         holder.recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new Adapter.OnRecyclerViewItemClickListener(){
             @Override
-            public void onItemClick(View view, App apps) {
-                Log.v("will","onItemClick"+ apps);
+            public void onItemClick(View view , String app){
+                Log.v("will", "APP data: " + app);
+
+
             }
         });
+
 
     }
 

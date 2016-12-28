@@ -9,8 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
+
+
 
 /**
  * Created by user on 2016/12/27.
@@ -28,27 +31,42 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         mPager = pager;
     }
 
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    public interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view , String app);
+    }
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_pager, parent, false);
-
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter, parent, false);
         ViewHolder vh = new ViewHolder(view);
+
         view.setOnClickListener(this);
-
         return vh;
-
-
     }
+
+
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         App app = mApps.get(position);
         holder.imageView.setImageResource(app.getDrawable());
         holder.nameTextView.setText(app.getName());
-        holder.itemView.setTag(mApps.get(position));
+        holder.itemView.setTag(app.getName());
 
+    }
 
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取数据
+            mOnItemClickListener.onItemClick(v,(String) v.getTag());
+        }
     }
 
     @Override
@@ -71,23 +89,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
-
         }
+
+
     }
 
-    @Override
-    public void onClick(View view) {
-        if (mOnItemClickListener != null) {
-            //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(view,(App) view.getTag());
-        }
-    }
-    public static interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view , App apps );
-    }
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        this.mOnItemClickListener = listener;
-    }
 }

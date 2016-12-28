@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
     android:id="@+id/cardView_item"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    android:layout_width="130dp"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
+    card_view:cardBackgroundColor="#ceb7ba95"
+    card_view:cardCornerRadius="8dp"
     android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground">
 
@@ -16,7 +19,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="88dp"
+            android:layout_width="120dp"
             android:layout_height="88dp"
             android:scaleX="1.2"
             android:scaleType="fitXY"
@@ -25,12 +28,13 @@
 
         <TextView
             android:id="@+id/nameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
             android:maxLines="2"
+            android:textColor="#000"
             android:text="Item"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
