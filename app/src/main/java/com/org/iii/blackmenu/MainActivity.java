@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         fmr = getSupportFragmentManager();
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f1);
+                        ftn.addToBackStack(null);
                         ftn.commit();
                         break;
                     case R.id.location_item:
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         fmr = getSupportFragmentManager();
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f2);
+                        ftn.addToBackStack(null);
                         ftn.commit();
                         break;
                 }

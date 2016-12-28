@@ -4,6 +4,7 @@ import java.util.List;
 
 
 public class Snap {
+
     private int mGravity;
     private String mText;
     private List<App> mApps;

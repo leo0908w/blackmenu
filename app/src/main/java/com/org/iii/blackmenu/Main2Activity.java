@@ -29,10 +29,6 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        TextView myTextView = (TextView) findViewById(R.id.textView);
-        Typeface typeface=Typeface.createFromAsset(getAssets(), "fonts/gloriahalleiujah.ttf");
-        myTextView.setTypeface(typeface);
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.main);
@@ -61,13 +57,13 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
         SnapAdapter snapAdapter = new SnapAdapter();
         if (mHorizontal) {
             snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "Snap center", apps));
-            snapAdapter.addSnap(new Snap(Gravity.START, "Snap start", apps));
-            snapAdapter.addSnap(new Snap(Gravity.END, "Snap end", apps));
-            snapAdapter.addSnap(new Snap(Gravity.CENTER, "Pager snap", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.START, "Snap start", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.END, "Snap end", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.CENTER, "Pager snap", apps));
         } else {
             snapAdapter.addSnap(new Snap(Gravity.CENTER_VERTICAL, "Snap center", apps));
-            snapAdapter.addSnap(new Snap(Gravity.TOP, "Snap top", apps));
-            snapAdapter.addSnap(new Snap(Gravity.BOTTOM, "Snap bottom", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.TOP, "Snap top", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.BOTTOM, "Snap bottom", apps));
         }
 
         mRecyclerView.setAdapter(snapAdapter);
@@ -75,17 +71,17 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
 
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
-        apps.add(new App("Google+", R.drawable.rice2, 4.6f));
-        apps.add(new App("Gmail", R.drawable.rice2, 4.8f));
-        apps.add(new App("Inbox", R.drawable.rice2, 4.5f));
-        apps.add(new App("Google Keep", R.drawable.rice2, 4.2f));
-        apps.add(new App("Google Drive", R.drawable.rice2, 4.6f));
-        apps.add(new App("Hangouts", R.drawable.rice2, 3.9f));
-        apps.add(new App("Google Photos", R.drawable.rice2, 4.6f));
-        apps.add(new App("Messenger", R.drawable.rice2, 4.2f));
-        apps.add(new App("Sheets", R.drawable.rice2, 4.2f));
-        apps.add(new App("Slides", R.drawable.rice2, 4.2f));
-        apps.add(new App("Docs", R.drawable.rice2, 4.2f));
+        apps.add(new App("Google+", R.drawable.rice2));
+        apps.add(new App("Gmail", R.drawable.rice2));
+        apps.add(new App("Inbox", R.drawable.rice2));
+        apps.add(new App("Google Keep", R.drawable.rice2));
+        apps.add(new App("Google Drive", R.drawable.rice2));
+        apps.add(new App("Hangouts", R.drawable.rice2));
+        apps.add(new App("Google Photos", R.drawable.rice2));
+        apps.add(new App("Messenger", R.drawable.rice2));
+        apps.add(new App("Sheets", R.drawable.rice2));
+        apps.add(new App("Slides", R.drawable.rice2));
+        apps.add(new App("Docs", R.drawable.rice2));
         return apps;
     }
 

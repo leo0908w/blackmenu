@@ -55,6 +55,7 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
                 return HORIZONTAL;
             case Gravity.BOTTOM:
                 return VERTICAL;
+
         }
         return HORIZONTAL;
     }
@@ -132,4 +133,3 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
 
     }
 }
-

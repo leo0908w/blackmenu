@@ -32,12 +32,17 @@ public class F1 extends Fragment {
     private Toolbar toolbar;
     private FragmentActivity myContext;
 
-
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        myContext = (FragmentActivity) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        myContext = (FragmentActivity) context;
     }
+
+//    @Override
+//    public void onAttach(Activity activity) {
+//        super.onAttach(activity);
+//        myContext = (FragmentActivity) activity;
+//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

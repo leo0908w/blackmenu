@@ -8,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,7 +23,10 @@ import java.util.List;
 
 
 public class Rice extends Fragment {
-    private RecyclerView recyclerView;
+    public static final String ORIENTATION = "orientation";
+
+    private RecyclerView mRecyclerView;
+    private boolean mHorizontal;
     private FragmentActivity myContext;
 
     @Override
@@ -29,9 +35,9 @@ public class Rice extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        myContext = (FragmentActivity) activity;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        myContext = (FragmentActivity) context;
     }
 
     @Override
@@ -45,7 +51,36 @@ public class Rice extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rice_f1, null);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(myContext));
+        mRecyclerView.setHasFixedSize(true);
 
+        setupAdapter();
         return view;
+    }
+
+    private void setupAdapter() {
+        List<App> apps = getApps();
+
+        SnapAdapter snapAdapter = new SnapAdapter();
+        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "定食", apps));
+//        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "拉麵", apps));
+//        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "濃湯", apps));
+        mRecyclerView.setAdapter(snapAdapter);
+    }
+
+    private List<App> getApps() {
+        List<App> apps = new ArrayList<>();
+        apps.add(new App("玫瑰牛排定食", R.drawable.rice1));
+        apps.add(new App("多汁鯖魚定食", R.drawable.rice2));
+        apps.add(new App("酥脆豬排定食", R.drawable.rice3));
+        apps.add(new App("玫瑰牛排定食", R.drawable.rice1));
+        apps.add(new App("多汁鯖魚定食", R.drawable.rice2));
+        apps.add(new App("酥脆豬排定食", R.drawable.rice3));
+        apps.add(new App("玫瑰牛排定食", R.drawable.rice1));
+        apps.add(new App("多汁鯖魚定食", R.drawable.rice2));
+        apps.add(new App("酥脆豬排定食", R.drawable.rice3));
+
+        return apps;
     }
 }

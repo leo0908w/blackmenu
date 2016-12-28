@@ -13,7 +13,7 @@ import java.util.List;
  * Created by user on 2016/12/27.
  */
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private List<App> mApps;
     private boolean mHorizontal;
@@ -43,7 +43,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         App app = mApps.get(position);
         holder.imageView.setImageResource(app.getDrawable());
         holder.nameTextView.setText(app.getName());
-        holder.ratingTextView.setText(String.valueOf(app.getRating()));
+
 
     }
 
@@ -61,13 +61,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
         public ImageView imageView;
         public TextView nameTextView;
-        public TextView ratingTextView;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
-            ratingTextView = (TextView) itemView.findViewById(R.id.ratingTextView);
+
         }
 
     }
