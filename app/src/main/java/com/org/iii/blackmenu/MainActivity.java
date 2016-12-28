@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         f1 = new F1();
         f2 = new F2();
-
+        fmr = getSupportFragmentManager();
+//        ftn = fmr.beginTransaction();
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.three_buttons_activity);
 
         BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
@@ -44,25 +45,20 @@ public class MainActivity extends AppCompatActivity {
                 switch (itemId) {
                     case R.id.recent_item:
                         Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
-                        fmr = getSupportFragmentManager();
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f1);
-                        ftn.addToBackStack(null);
                         ftn.commit();
                         break;
                     case R.id.location_item:
                         Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
-                        fmr = getSupportFragmentManager();
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f2);
-                        ftn.addToBackStack(null);
                         ftn.commit();
                         break;
                 }
             }
         });
 
-        fmr = getSupportFragmentManager();
         ftn = fmr.beginTransaction();
         ftn.add(R.id.container, f1);
         ftn.commit();

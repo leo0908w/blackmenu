@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> implements GravitySnapHelper.SnapListener {
 
@@ -103,11 +104,20 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
             new GravitySnapHelper(snap.getGravity()).attachToRecyclerView(holder.recyclerView);
         }
 
-
-        holder.recyclerView.setAdapter(new Adapter(snap.getGravity() == Gravity.START
+        Adapter adapter = new Adapter(snap.getGravity() == Gravity.START
                 || snap.getGravity() == Gravity.END
                 || snap.getGravity() == Gravity.CENTER_HORIZONTAL,
-                snap.getGravity() == Gravity.CENTER, snap.getApps()));
+                snap.getGravity() == Gravity.CENTER, snap.getApps());
+
+        holder.recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(new Adapter.OnRecyclerViewItemClickListener(){
+            @Override
+            public void onItemClick(View view, App apps) {
+                Log.v("will","onItemClick"+ apps);
+            }
+        });
+
     }
 
     @Override

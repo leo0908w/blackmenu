@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class Noodle extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(myContext));
         mRecyclerView.setHasFixedSize(true);
+        Log.v("will", "Noodle onCreateView");
         setupAdapter();
         return view;
     }
@@ -62,23 +64,24 @@ public class Noodle extends Fragment {
 
         SnapAdapter snapAdapter = new SnapAdapter();
 //        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "定食", apps));
+//        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "拉麵", apps));
         snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "拉麵", apps));
-//        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "濃湯", apps));
         mRecyclerView.setAdapter(snapAdapter);
     }
 
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
-        apps.add(new App("香濃豚骨拉麵", R.drawable.noodle1));
-        apps.add(new App("特濃叉燒拉麵", R.drawable.noodle2));
-        apps.add(new App("叉燒乾拌烏龍麵", R.drawable.noodle3));
-        apps.add(new App("香濃豚骨拉麵", R.drawable.noodle1));
-        apps.add(new App("特濃叉燒拉麵", R.drawable.noodle2));
-        apps.add(new App("叉燒乾拌烏龍麵", R.drawable.noodle3));
-        apps.add(new App("香濃豚骨拉麵", R.drawable.noodle1));
-        apps.add(new App("特濃叉燒拉麵", R.drawable.noodle2));
-        apps.add(new App("叉燒乾拌烏龍麵", R.drawable.noodle3));
+        apps.add(new App("豚王", R.drawable.noodle1));
+        apps.add(new App("赤王", R.drawable.noodle2));
+        apps.add(new App("翠王", R.drawable.noodle3));
+        apps.add(new App("豚王", R.drawable.noodle1));
+        apps.add(new App("赤王", R.drawable.noodle2));
+        apps.add(new App("豚王", R.drawable.noodle1));
+        apps.add(new App("赤王", R.drawable.noodle2));
+        apps.add(new App("翠王", R.drawable.noodle3));
+
 
         return apps;
     }
 }
+
