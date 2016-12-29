@@ -22,13 +22,9 @@ import java.util.List;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener {
 
     private List<App> mApps;
-    private boolean mHorizontal;
-    private boolean mPager;
 
-    public Adapter(boolean horizontal, boolean pager, List<App> apps) {
-        mHorizontal = horizontal;
+    public Adapter(List<App> apps) {
         mApps = apps;
-        mPager = pager;
     }
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;

@@ -64,21 +64,21 @@ public class Soup extends Fragment {
         SnapAdapter snapAdapter = new SnapAdapter();
 //        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "定食", apps));
 //        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "拉麵", apps));
-        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "濃湯", apps));
+        snapAdapter.addSnap(new Snap("濃湯", apps));
         mRecyclerView.setAdapter(snapAdapter);
     }
 
     private List<App> getApps() {
         List<App> apps = new ArrayList<>();
-//        apps.add(new App("番茄濃湯", R.drawable.soup1));
-//        apps.add(new App("玉米濃湯", R.drawable.soup2));
-//        apps.add(new App("南瓜濃湯", R.drawable.soup3));
-//        apps.add(new App("番茄濃湯", R.drawable.soup1));
-//        apps.add(new App("玉米濃湯", R.drawable.soup2));
-//        apps.add(new App("南瓜濃湯", R.drawable.soup3));
-//        apps.add(new App("番茄濃湯", R.drawable.soup1));
-//        apps.add(new App("玉米濃湯", R.drawable.soup2));
-//        apps.add(new App("南瓜濃湯", R.drawable.soup3));
+        apps.add(new App("番茄濃湯", R.drawable.soup1));
+        apps.add(new App("玉米濃湯", R.drawable.soup2));
+        apps.add(new App("南瓜濃湯", R.drawable.soup3));
+        apps.add(new App("番茄濃湯", R.drawable.soup1));
+        apps.add(new App("玉米濃湯", R.drawable.soup2));
+        apps.add(new App("南瓜濃湯", R.drawable.soup3));
+        apps.add(new App("番茄濃湯", R.drawable.soup1));
+        apps.add(new App("玉米濃湯", R.drawable.soup2));
+        apps.add(new App("南瓜濃湯", R.drawable.soup3));
 
         return apps;
     }

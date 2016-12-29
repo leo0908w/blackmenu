@@ -79,10 +79,11 @@ public class Rice extends Fragment {
 
     private void setupAdapter() {
         List<App> apps = getApps();
+        List<App> apps1 = getnoodle();
 
         SnapAdapter snapAdapter = new SnapAdapter();
-        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "定食", apps));
-//        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "拉麵", apps));
+        snapAdapter.addSnap(new Snap("定食", apps));
+        snapAdapter.addSnap(new Snap("拉麵", apps1));
 //        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "濃湯", apps));
         mRecyclerView.setAdapter(snapAdapter);
     }
@@ -102,5 +103,17 @@ public class Rice extends Fragment {
         return apps;
     }
 
+    private List<App> getnoodle() {
+        List<App> apps = new ArrayList<>();
+        apps.add(new App("豚王", R.drawable.noodle1));
+        apps.add(new App("赤王", R.drawable.noodle2));
+        apps.add(new App("翠王", R.drawable.noodle3));
+        apps.add(new App("豚王", R.drawable.noodle1));
+        apps.add(new App("赤王", R.drawable.noodle2));
+        apps.add(new App("豚王", R.drawable.noodle1));
+        apps.add(new App("赤王", R.drawable.noodle2));
+        apps.add(new App("翠王", R.drawable.noodle3));
 
+        return apps;
+    }
 }

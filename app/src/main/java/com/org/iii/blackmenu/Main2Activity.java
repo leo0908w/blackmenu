@@ -56,12 +56,12 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
 
         SnapAdapter snapAdapter = new SnapAdapter();
         if (mHorizontal) {
-            snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "Snap center", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "Snap center", apps));
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Snap start", apps));
 //            snapAdapter.addSnap(new Snap(Gravity.END, "Snap end", apps));
 //            snapAdapter.addSnap(new Snap(Gravity.CENTER, "Pager snap", apps));
         } else {
-            snapAdapter.addSnap(new Snap(Gravity.CENTER_VERTICAL, "Snap center", apps));
+//            snapAdapter.addSnap(new Snap(Gravity.CENTER_VERTICAL, "Snap center", apps));
 //            snapAdapter.addSnap(new Snap(Gravity.TOP, "Snap top", apps));
 //            snapAdapter.addSnap(new Snap(Gravity.BOTTOM, "Snap bottom", apps));
         }

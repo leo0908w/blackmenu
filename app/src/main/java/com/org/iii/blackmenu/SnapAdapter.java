@@ -13,13 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper;
-
 import java.util.ArrayList;
 
-public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> implements GravitySnapHelper.SnapListener {
+public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder>{
 
-        private ArrayList<Snap> mSnaps;
+    private ArrayList<Snap> mSnaps;
 
     public SnapAdapter() {
         mSnaps = new ArrayList<>();
@@ -43,14 +41,11 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         holder.snapTextView.setText(snap.getText());
 
         holder.recyclerView.setLayoutManager(new LinearLayoutManager(holder
-                .recyclerView.getContext(), snap.getGravity() == Gravity.CENTER_HORIZONTAL ?
-                LinearLayoutManager.HORIZONTAL : LinearLayoutManager.VERTICAL, false));
+                .recyclerView.getContext(), LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setOnFlingListener(null);
 
         new LinearSnapHelper().attachToRecyclerView(holder.recyclerView);
-        Adapter adapter = new Adapter(
-                snap.getGravity() == Gravity.CENTER_HORIZONTAL,
-                snap.getGravity() == Gravity.CENTER, snap.getApps());
+        Adapter adapter = new Adapter(snap.getApps());
 
         holder.recyclerView.setAdapter(adapter);
 
@@ -58,12 +53,8 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
             @Override
             public void onItemClick(View view , String app){
                 Log.v("will", "APP data: " + app);
-
-
             }
         });
-
-
     }
 
     @Override
@@ -71,10 +62,6 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder> im
         return mSnaps.size();
     }
 
-    @Override
-    public void onSnap(int position) {
-        Log.d("Snapped: ", position + "");
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
