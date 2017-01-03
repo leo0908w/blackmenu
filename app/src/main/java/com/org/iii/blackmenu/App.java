@@ -10,14 +10,16 @@ public class App {
     private String mName;
     private int mPrice;
 
-    public App(String name, int drawable) {
+    public App(String name, int drawable, int price) {
         mName = name;
         mDrawable = drawable;
-
+        mPrice = price;
 
     }
 
-
+    public int getPrice() {
+        return mPrice;
+    }
 
     public int getDrawable() {
         return mDrawable;

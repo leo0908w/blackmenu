@@ -18,6 +18,8 @@ import android.view.View;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
+import org.greenrobot.eventbus.EventBus;
+
 
 public class MainActivity extends AppCompatActivity {
     private CoordinatorLayout coordinatorLayout;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        EventBus.getDefault().register(this);
 
 
         fmr = getSupportFragmentManager();
@@ -58,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.location_item:
 //                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
                         ftn = fmr.beginTransaction();
-                        ftn.replace(R.id.container, ma);
+                        ftn.replace(R.id.container, f2);
                         ftn.addToBackStack(null);
                         ftn.commit();
                         break;
@@ -85,5 +88,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
     }
 }

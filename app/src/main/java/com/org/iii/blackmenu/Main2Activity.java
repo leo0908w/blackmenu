@@ -54,7 +54,7 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
     private void setupAdapter() {
         List<App> apps = getApps();
 
-        SnapAdapter snapAdapter = new SnapAdapter();
+//        SnapAdapter snapAdapter = new SnapAdapter();
         if (mHorizontal) {
 //            snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "Snap center", apps));
 //            snapAdapter.addSnap(new Snap(Gravity.START, "Snap start", apps));
@@ -66,7 +66,7 @@ public class Main2Activity extends AppCompatActivity implements Toolbar.OnMenuIt
 //            snapAdapter.addSnap(new Snap(Gravity.BOTTOM, "Snap bottom", apps));
         }
 
-        mRecyclerView.setAdapter(snapAdapter);
+//        mRecyclerView.setAdapter(snapAdapter);
     }
 
     private List<App> getApps() {

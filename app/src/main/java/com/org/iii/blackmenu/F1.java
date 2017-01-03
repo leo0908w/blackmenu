@@ -28,7 +28,7 @@ public class F1 extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private Toolbar toolbar;
-    private FragmentActivity myContext;
+    private Activity mActivity;
     private Rice rice;
     private Noodle noodle;
     private Soup soup;
@@ -37,7 +37,7 @@ public class F1 extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        myContext = (FragmentActivity) context;
+        this.mActivity = (Activity) context;
 //        Log.v("will", "F1-onAttach");
     }
 

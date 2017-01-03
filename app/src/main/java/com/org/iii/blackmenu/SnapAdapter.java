@@ -1,6 +1,11 @@
 package com.org.iii.blackmenu;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.PagerSnapHelper;
@@ -13,14 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 
 public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder>{
-
+    private Context mContext;
     private ArrayList<Snap> mSnaps;
 
-    public SnapAdapter() {
+    public SnapAdapter(Context context) {
         mSnaps = new ArrayList<>();
+        this.mContext = context;
     }
 
     public void addSnap(Snap snap) {
@@ -49,10 +57,22 @@ public class SnapAdapter extends RecyclerView.Adapter<SnapAdapter.ViewHolder>{
 
         holder.recyclerView.setAdapter(adapter);
 
+
         adapter.setOnItemClickListener(new Adapter.OnRecyclerViewItemClickListener(){
             @Override
-            public void onItemClick(View view , String app){
-                Log.v("will", "APP data: " + app);
+            public void onItemClick(View view ,String app){
+
+                menupager fragment = new menupager();
+                ToMsg us = new ToMsg();
+
+                FragmentManager fragmentManager = ((MainActivity)mContext).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.container, fragment);
+                fragmentTransaction.addToBackStack(null);
+                us.setUserName(app);
+                EventBus.getDefault().post(us);
+                fragmentTransaction.commit();
+                Log.v("will", "APP data: "  + app);
             }
         });
     }
