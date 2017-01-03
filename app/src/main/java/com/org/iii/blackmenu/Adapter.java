@@ -37,9 +37,7 @@ import static com.org.iii.blackmenu.R.id.priceTextView;
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener {
 
     private Context context;
-    private FireBase fireBase;
     public ImageView imageView;
-//    private Timer timer;
 
     private List<String> food;
     private List<String> path;
@@ -76,24 +74,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        //App app = mApps.get(position);
-        //holder.imageView.setImageResource(app.getDrawable());
-
             Picasso.with(context)
-                    .load(path.get(position))
-                    .error(R.drawable.rice1)
-                    .placeholder(R.drawable.noodle1)
-                    .resize(150, 150)
-                    .centerCrop()
-                    .into(imageView);
-
+                   .load(path.get(position))
+                   .error(R.drawable.rice1)
+                   .placeholder(R.drawable.noodle1)
+                   .resize(150, 150)
+                   .centerCrop()
+                   .into(imageView);
         holder.nameTextView.setText(food.get(position));
         holder.priceTextView.setText("$"+price.get(position));
 
         holder.itemView.setTag(""+position);
-
-//        holder.itemView.setTag(app.getPrice());
     }
 
     @Override

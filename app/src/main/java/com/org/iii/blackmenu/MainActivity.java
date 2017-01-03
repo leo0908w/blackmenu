@@ -95,15 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onEvent(ToMsg event) {
-//        String msg = event.getUserName();
-//        Log.v("will", "get: " + msg);
-//        nametv.setText(msg);
-//    }
-
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
