@@ -3,10 +3,10 @@
     android:id="@+id/cardView_item"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="130dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    card_view:cardBackgroundColor="#ceb7ba95"
+    card_view:cardBackgroundColor="#ced9d9d9"
     card_view:cardCornerRadius="8dp"
     android:orientation="vertical"
     android:background="?android:attr/selectableItemBackground">
@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="120dp"
+            android:layout_width="match_parent"
             android:layout_height="88dp"
             android:scaleX="1.2"
             android:scaleType="fitXY"
@@ -36,7 +36,25 @@
             android:maxLines="2"
             android:textColor="#000"
             android:text="Item"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textSize="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            />
+
+        <TextView
+            android:id="@+id/priceTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+
+            android:maxLines="2"
+            android:textColor="#000"
+            android:text="$20"
+            android:textSize="18dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            />
+
+
 
 
 

@@ -1,6 +1,11 @@
 package com.org.iii.blackmenu;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -15,8 +20,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
+import com.squareup.picasso.Picasso;
 
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.org.iii.blackmenu.R.id.imageView;
+import static com.org.iii.blackmenu.R.id.priceTextView;
 
 
 /**
@@ -25,11 +36,21 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener {
 
-    private List<App> mApps;
+    private Context context;
+    private FireBase fireBase;
+    public ImageView imageView;
+//    private Timer timer;
 
-    public Adapter(List<App> apps) {
+    private List<String> food;
+    private List<String> path;
+    private List<String> price;
 
-        mApps = apps;
+    public Adapter(Context context ,List<String> food , List<String> path , List<String> price) {
+
+        this.context = context;
+        this.path = path;
+        this.food = food;
+        this.price = price;
     }
 
 
@@ -47,7 +68,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter, parent, false);
         ViewHolder vh = new ViewHolder(view);
-
         view.setOnClickListener(this);
         return vh;
     }
@@ -56,13 +76,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        App app = mApps.get(position);
-        holder.imageView.setImageResource(app.getDrawable());
-        holder.nameTextView.setText(app.getName());
-        holder.itemView.setTag(app.getName());
+
+        //App app = mApps.get(position);
+        //holder.imageView.setImageResource(app.getDrawable());
+
+            Picasso.with(context)
+                    .load(path.get(position))
+                    .error(R.drawable.rice1)
+                    .placeholder(R.drawable.noodle1)
+                    .resize(150, 150)
+                    .centerCrop()
+                    .into(imageView);
+
+        holder.nameTextView.setText(food.get(position));
+        holder.priceTextView.setText("$"+price.get(position));
+
+        holder.itemView.setTag(""+position);
+
 //        holder.itemView.setTag(app.getPrice());
-
-
     }
 
     @Override
@@ -70,7 +101,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         if (mOnItemClickListener != null) {
             //注意这里使用getTag方法获取数据
             mOnItemClickListener.onItemClick(v, (String) v.getTag());
-
         }
     }
 
@@ -81,13 +111,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
     @Override
     public int getItemCount() {
-        return mApps.size();
+        return food.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 //        public CardView cardView;
-
-        public ImageView imageView;
+        public TextView priceTextView;
         public TextView nameTextView;
 //        private Context context;
 
@@ -96,14 +125,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             nameTextView = (TextView) itemView.findViewById(R.id.nameTextView);
-
+            priceTextView = (TextView) itemView.findViewById(R.id.priceTextView);
 //            this.context = context;
 //            itemView.setOnClickListener(this);
         }
-
-
-
     }
-
 
 }

@@ -3,11 +3,14 @@ package com.org.iii.blackmenu;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,59 +27,59 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import static com.org.iii.blackmenu.FireBase.food;
+import static com.org.iii.blackmenu.FireBase.path;
+import static com.org.iii.blackmenu.FireBase.price;
 import static com.org.iii.blackmenu.R.id.snap;
 
 public class Rice extends Fragment {
     private RecyclerView mRecyclerView;
     private Activity myContext;
     private F2 f2;
-    private Button button;
-
+    private FireBase fireBase;
+    private MyHandle myHandle;
+    private int count;
+    private Timer timer;
+    private Adapter snapAdapter;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.myContext = (Activity) context;
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         f2 = new F2();
-
+        fireBase = new FireBase();
+        startRead();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.rice_f1, null);
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        button = (Button) view.findViewById(R.id.test);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(myContext));
-        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.addItemDecoration(new MarginDecoration(this));
+//        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(myContext, 2));
+        snapAdapter = new Adapter(myContext, food, path ,price);
+        mRecyclerView.setAdapter(snapAdapter);
+
         Log.v("will", "Rice onCreateView");
-        button.setOnClickListener(new View.OnClickListener() {
+        snapAdapter.setOnItemClickListener(new Adapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onClick(View v) {
-                menupager fragment = new menupager();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+            public void onItemClick(View view, String app) {
+                Log.v("will", "APP data: "  + app);
             }
         });
 
-//        Adapter adapter = new Adapter();
-//        adapter.setOnItemClickListener(new Adapter.OnRecyclerViewItemClickListener(){
-//            @Override
-//            public void onItemClick(View view , String app){
-//                Log.v("will", "APP data: " + app);
-//            }
-//        });
-
-        setupAdapter();
         return view;
     }
 
@@ -103,43 +106,33 @@ public class Rice extends Fragment {
 //        Log.v("will", "Rice onActivityCreated");
     }
 
-    private void setupAdapter() {
-        List<App> apps = getApps();
-        List<App> apps1 = getnoodle();
+    public void startRead (){
+        timer = new Timer();
+        myHandle = new MyHandle();
 
-        SnapAdapter snapAdapter = new SnapAdapter(myContext);
-        snapAdapter.addSnap(new Snap("定食", apps));
-        snapAdapter.addSnap(new Snap("拉麵", apps1));
-//        snapAdapter.addSnap(new Snap(Gravity.CENTER_HORIZONTAL, "濃湯", apps));
-        mRecyclerView.setAdapter(snapAdapter);
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                myHandle.sendEmptyMessage(0);
+            }
+        }, 0, 2000);
+
     }
 
-    private List<App> getApps() {
-        List<App> apps = new ArrayList<>();
-        apps.add(new App("玫瑰牛排定食", R.drawable.rice1, 100));
-        apps.add(new App("多汁鯖魚定食", R.drawable.rice2, 200));
-        apps.add(new App("酥脆豬排定食", R.drawable.rice3, 300));
-        apps.add(new App("玫瑰牛排定食", R.drawable.rice1, 100));
-        apps.add(new App("多汁鯖魚定食", R.drawable.rice2, 200));
-        apps.add(new App("酥脆豬排定食", R.drawable.rice3, 300));
-        apps.add(new App("玫瑰牛排定食", R.drawable.rice1, 100));
-        apps.add(new App("多汁鯖魚定食", R.drawable.rice2, 200));
-        apps.add(new App("酥脆豬排定食", R.drawable.rice3, 300));
 
-        return apps;
-    }
+    public class MyHandle extends Handler {
 
-    private List<App> getnoodle() {
-        List<App> apps = new ArrayList<>();
-//        apps.add(new App("豚王", R.drawable.noodle1));
-//        apps.add(new App("赤王", R.drawable.noodle2));
-//        apps.add(new App("翠王", R.drawable.noodle3));
-//        apps.add(new App("豚王", R.drawable.noodle1));
-//        apps.add(new App("赤王", R.drawable.noodle2));
-//        apps.add(new App("豚王", R.drawable.noodle1));
-//        apps.add(new App("赤王", R.drawable.noodle2));
-//        apps.add(new App("翠王", R.drawable.noodle3));
-
-        return apps;
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            snapAdapter.notifyDataSetChanged();
+            if (count>2){
+                timer.purge();
+                timer.cancel();
+                timer=null;
+            }
+            count++;
+            Log.v("will" , "timerTask" );
+        }
     }
 }

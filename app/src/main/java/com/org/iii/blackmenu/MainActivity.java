@@ -13,12 +13,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fmr;
     private FragmentTransaction ftn;
     private Toolbar toolbar;
+    private FireBase fireBase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +89,20 @@ public class MainActivity extends AppCompatActivity {
         // Use custom typeface that's located at the "/src/main/assets" directory. If using with
         // custom text appearance, set the text appearance first.
 //        bottomBar.setTypeFace("MyFont.ttf");
+        fireBase = new FireBase();
 
-
+        fireBase.ReadFoodBase("menuinfo");
 
     }
+
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onEvent(ToMsg event) {
+//        String msg = event.getUserName();
+//        Log.v("will", "get: " + msg);
+//        nametv.setText(msg);
+//    }
+
+
 
     @Override
     protected void onDestroy() {
