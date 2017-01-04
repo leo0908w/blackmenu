@@ -23,10 +23,7 @@ import java.util.List;
  */
 
 public class Noodle extends Fragment {
-    public static final String ORIENTATION = "orientation";
-
     private RecyclerView mRecyclerView;
-    private boolean mHorizontal;
     private FragmentActivity myContext;
 
     @Override

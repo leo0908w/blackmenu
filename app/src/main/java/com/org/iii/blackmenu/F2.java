@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by user on 2016/12/26.
  */
 
-public class F2 extends Fragment implements Button.OnClickListener, AdapterView.OnItemClickListener{
+public class F2 extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener{
     private Toolbar toolbar;
     private Activity mActivity;
     private List<product> datas; //數據源

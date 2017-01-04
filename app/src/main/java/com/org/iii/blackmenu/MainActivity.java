@@ -17,7 +17,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarBadge;
+import com.roughike.bottombar.BottomBarFragment;
 import com.roughike.bottombar.OnMenuTabSelectedListener;
+import com.roughike.bottombar.OnTabSelectedListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -25,45 +28,48 @@ import org.greenrobot.eventbus.ThreadMode;
 
 
 public class MainActivity extends AppCompatActivity {
-    private CoordinatorLayout coordinatorLayout;
     private F1 f1;
     private F2 f2;
-    private menupager ma;
     private FragmentManager fmr;
     private FragmentTransaction ftn;
-    private Toolbar toolbar;
     private FireBase fireBase;
+    private BottomBar bottomBar;
+    private menupager mu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        EventBus.getDefault().register(this);
-
 
         fmr = getSupportFragmentManager();
-//        ftn = fmr.beginTransaction();
 
         f1 = new F1();
         f2 = new F2();
-        ma = new menupager();
+        mu = new menupager();
 
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.three_buttons_activity);
+        bottomBar = BottomBar.attach(this, savedInstanceState);
 
-        BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-        bottomBar.setItemsFromMenu(R.menu.three_buttons_menu, new OnMenuTabSelectedListener() {
+        bottomBar.setFragmentItems(getSupportFragmentManager(), R.id.container,
+                new BottomBarFragment(f1, R.drawable.restaurantmenu, "菜單"),
+                new BottomBarFragment(mu, R.drawable.shoppingcart, "點餐明細")
+        );
+
+        // Setting colors for different tabs when there's more than three of them.
+        bottomBar.mapColorForTab(0, "#00796B");
+        bottomBar.mapColorForTab(1, "#7B1FA2");
+
+        bottomBar.setOnItemSelectedListener(new OnTabSelectedListener() {
             @Override
-            public void onMenuItemSelected(int itemId) {
-                switch (itemId) {
-                    case R.id.recent_item:
-//                        Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
+            public void onItemSelected(int position) {
+                switch (position) {
+                    case 0:
+                        // Item 1 Selected
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f1);
                         ftn.addToBackStack(null);
                         ftn.commit();
                         break;
-                    case R.id.location_item:
-//                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
+                    case 1:
                         ftn = fmr.beginTransaction();
                         ftn.replace(R.id.container, f2);
                         ftn.addToBackStack(null);
@@ -73,26 +79,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ftn = fmr.beginTransaction();
-        ftn.add(R.id.container, f1);
-        ftn.commit();
+        // Make a Badge for the first tab, with red background color and a value of "4".
+        BottomBarBadge unreadMessages = bottomBar.makeBadgeForTabAt(1, "#E91E63", 5);
 
-        // Set the color for the active tab. Ignored on mobile when there are more than three tabs.
-//        bottomBar.setActiveTabColor("#C2185B");
+        // Control the badge's visibility
+        unreadMessages.show();
+        //unreadMessages.hide();
 
-        // Use the dark theme. Ignored on mobile when there are more than three tabs.
-//        bottomBar.useDarkTheme(true);
+        // Change the displayed count for this badge.
+        unreadMessages.setCount(2);
 
-        // Use custom text appearance in tab titles.
-//        bottomBar.setTextAppearance(R.style.MyTextAppearance);
+        // Change the show / hide animation duration.
+//        unreadMessages.setAnimationDuration(9999999);
 
-        // Use custom typeface that's located at the "/src/main/assets" directory. If using with
-        // custom text appearance, set the text appearance first.
-//        bottomBar.setTypeFace("MyFont.ttf");
+        // If you want the badge be shown always after unselecting the tab that contains it.
+        unreadMessages.setAutoShowAfterUnSelection(true);
+
         fireBase = new FireBase();
-
         fireBase.ReadFoodBase("menuinfo");
-
     }
 
     @Override

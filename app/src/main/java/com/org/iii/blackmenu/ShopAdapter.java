@@ -1,11 +1,13 @@
 package com.org.iii.blackmenu;
 
 import android.content.Context;
+import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -62,8 +64,8 @@ public class ShopAdapter extends BaseAdapter {
         private TextView item_product_num;
         private TextView item_product_price;
         //增减商品数量按钮
-        private Button item_btn_add;
-        private Button item_btn_sub;
+        private ImageButton item_btn_add;
+        private ImageButton item_btn_sub;
 
     }
 
@@ -84,10 +86,10 @@ public class ShopAdapter extends BaseAdapter {
             holder.item_product_price = (TextView) v.findViewById(R.id.item_product_price);
 
             //设置接口回调，注意参数不是上下文，它需要ListView所在的Activity或者Fragment处理接口回调方法
-            holder.item_btn_add = (Button) v.findViewById(R.id.item_btn_add);
+            holder.item_btn_add = (ImageButton) v.findViewById(R.id.item_btn_add);
             holder.item_btn_add.setOnClickListener(onAddNum);
 
-            holder.item_btn_sub = (Button) v.findViewById(R.id.item_btn_sub);
+            holder.item_btn_sub = (ImageButton) v.findViewById(R.id.item_btn_sub);
             holder.item_btn_sub.setOnClickListener(onSubNum);
         }
 

@@ -6,6 +6,7 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,17 +37,16 @@ import static com.org.iii.blackmenu.R.id.priceTextView;
  */
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements View.OnClickListener {
-
-    private Context context;
+    private Fragment fragment;
     public ImageView imageView;
 
     private List<String> food;
     private List<String> path;
     private List<String> price;
 
-    public Adapter(Context context ,List<String> food , List<String> path , List<String> price) {
+    public Adapter(Fragment fragment , List<String> food , List<String> path , List<String> price) {
 
-        this.context = context;
+        this.fragment = fragment;
         this.path = path;
         this.food = food;
         this.price = price;
@@ -74,11 +75,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-            Picasso.with(context)
+            Glide.with(fragment)
                    .load(path.get(position))
                    .error(R.drawable.rice1)
                    .placeholder(R.drawable.noodle1)
-                   .resize(150, 150)
                    .centerCrop()
                    .into(imageView);
         holder.nameTextView.setText(food.get(position));

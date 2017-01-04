@@ -62,8 +62,8 @@ public class F1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.f1_layout, container, false);
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 //        setSupportActionBar(toolbar);
 //        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -99,8 +99,8 @@ public class F1 extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(rice, "飯類");
-//        adapter.addFragment(noodle, "麵類");
-//        adapter.addFragment(soup, "湯類");
+        adapter.addFragment(noodle, "麵類");
+        adapter.addFragment(soup, "湯類");
         Log.v("will", "F1-adapter:" + adapter);
 //        Log.v("will", "F1-setupViewPager");
 //        adapter.notifyDataSetChanged();

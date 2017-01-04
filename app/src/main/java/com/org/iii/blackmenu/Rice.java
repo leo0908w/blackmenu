@@ -38,7 +38,6 @@ import static com.org.iii.blackmenu.R.id.snap;
 public class Rice extends Fragment {
     private RecyclerView mRecyclerView;
     private Activity myContext;
-    private F2 f2;
     private FireBase fireBase;
     private MyHandle myHandle;
     private int count;
@@ -55,7 +54,6 @@ public class Rice extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        f2 = new F2();
         fireBase = new FireBase();
         startRead();
     }
@@ -69,7 +67,7 @@ public class Rice extends Fragment {
 //        mRecyclerView.addItemDecoration(new MarginDecoration(this));
 //        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new GridLayoutManager(myContext, 2));
-        snapAdapter = new Adapter(myContext, food, path ,price);
+        snapAdapter = new Adapter(this, food, path ,price);
         mRecyclerView.setAdapter(snapAdapter);
 
         Log.v("will", "Rice onCreateView");
@@ -115,7 +113,7 @@ public class Rice extends Fragment {
             public void run() {
                 myHandle.sendEmptyMessage(0);
             }
-        }, 0, 2000);
+        }, 0, 1000);
 
     }
 
